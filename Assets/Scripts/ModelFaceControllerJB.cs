@@ -421,5 +421,42 @@ public class ModelFaceControllerJB : MonoBehaviour
 			joint.localRotation = Quaternion.Euler(jointRot);
 	}
 
+	//private void SetJointPosition(Transform joint, AxisEnum axis, float fAU, float fMin, float fMax)
+	//{
+	//	if (joint == null)
+	//		return;
+
+	//	//		float fSign = 1.0f;
+	//	//		if(fMax < fMin)
+	//	//			fSign = -1.0f;
+
+	//	// [-1, +1] -> [0, 1]
+	//	//fAUnorm = (fAU + 1f) / 2f;
+	//	float fValue = fMin + (fMax - fMin) * fAU;
+
+	//	float jointPos;// = joint.localRotation.eulerAngles;
+
+	//	switch (axis)
+	//	{
+	//		case AxisEnum.X:
+	//			jointRot.x = fValue;
+
+	//			break;
+
+	//		case AxisEnum.Y:
+	//			jointRot.y = fValue;
+	//			break;
+
+	//		case AxisEnum.Z:
+	//			jointRot.z = fValue;
+	//			break;
+	//	}
+
+	//	if (smoothFactor != 0f)
+	//		joint.localRotation = Quaternion.Slerp(joint.localRotation, Quaternion.Euler(jointRot), smoothFactor * Time.deltaTime);
+	//	else
+	//		joint.localRotation = Quaternion.Euler(jointRot);
+	//}
+
 
 }
