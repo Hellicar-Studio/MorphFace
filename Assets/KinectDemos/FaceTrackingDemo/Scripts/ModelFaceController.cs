@@ -273,12 +273,17 @@ public class ModelFaceController : MonoBehaviour
 
 				// set the position
 				if(smoothFactor != 0f)
+				{
 					HeadTransform.position = Vector3.Lerp(HeadTransform.position, newPosition, smoothFactor * Time.deltaTime);
+				}
 				else
+				{
 					HeadTransform.position = newPosition;
 
+				}
+
 				// scale factor
-				if(HeadTransform.localScale.x != modelScaleFactor)
+				if (HeadTransform.localScale.x != modelScaleFactor)
 				{
 					HeadTransform.localScale = new Vector3(modelScaleFactor, modelScaleFactor, modelScaleFactor);
 				}
