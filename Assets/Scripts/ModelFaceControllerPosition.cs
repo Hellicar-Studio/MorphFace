@@ -15,6 +15,8 @@ public class ModelFaceControllerPosition : MonoBehaviour
 	[Tooltip("Camera used to estimate the overlay position of the head over the background.")]
 	public Camera foregroundCamera;
 
+	public float minDifference;
+
 	// for testing purposes
 	//public Transform overlayObj;
 
@@ -301,7 +303,7 @@ public class ModelFaceControllerPosition : MonoBehaviour
 			SetJointPosition(UpperLipRight, UpperLipRightAxis, fAU0, UpperLipRightNeutral, UpperLipRightUp);
 
 			// AU1 - Jaw Lowerer
-			// 0=closed; 1=fully open; -1= closed, like 0
+			// 0=closed; 1=fully open; -1=closed, like 0
 			float fAU1 = manager.GetAnimUnit(KinectInterop.FaceShapeAnimations.JawOpen);
 			//SetJointPosition(Jaw, JawAxis, fAU1, JawNeutral, JawDown);
 			SetJointPosition(Jaw, JawAxis, fAU1, JawNeutral, JawDown);
@@ -395,7 +397,10 @@ public class ModelFaceControllerPosition : MonoBehaviour
 		//			fSign = -1.0f;
 
 		// [-1, +1] -> [0, 1]
-		//fAUnorm = (fAU + 1f) / 2f;
+		// fAUnorm = (fAU + 1f) / 2f;
+		if(Mathf.Abs(fAU) < minDifference) {
+			fAU = 0;
+		}
 		float fValue = fMin + (fMax - fMin) * fAU;
 
 		Vector3 jointPos = joint.localPosition;// = joint.localRotation.eulerAngles;
