@@ -7,9 +7,16 @@ public class RotationChecker : MonoBehaviour {
 	private FacetrackingManager manager;
 	private KinectInterop.DepthSensorPlatform platform;
 
-	public float angle;
+	public float angleY;
+	public float angleX;
+	public float angleZ;
 
-	public List<GameObject> renderers;
+
+
+	public List<Material> mats;
+	private List<Color> originalColors;
+
+	public float alpha;
 
 	//[Tooltip("Transform of the joint, used to move and rotate the head.")]
 	//public Transform HeadTransform;
@@ -21,11 +28,21 @@ public class RotationChecker : MonoBehaviour {
 		{
 			platform = kinectManager.GetSensorPlatform();
 		}
+
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
+		if(originalColors.Count == 0)
+		{
+			for (int i = 0; i < mats.Count; i++)
+			{
+				Color col = mats[i].GetColor("_Color");
+				originalColors.Add(col);
+			}
+		}
+
 		// get the face-tracking manager instance
 		if (manager == null)
 		{
@@ -38,20 +55,34 @@ public class RotationChecker : MonoBehaviour {
 
 			// head rotation
 			Quaternion newRotation = manager.GetHeadRotation(true);
-			Debug.Log(newRotation.eulerAngles.y);
-			if (newRotation.eulerAngles.y > angle && newRotation.eulerAngles.y < 360 - angle)
+			Debug.Log(newRotation.eulerAngles.z);
+			bool lerpDown = false;
+			bool outY = (newRotation.eulerAngles.y > angleY && newRotation.eulerAngles.y < 360 - angleY);
+			bool outX = (newRotation.eulerAngles.x > angleX && newRotation.eulerAngles.x < 360 - angleX);
+			bool outZ = (newRotation.eulerAngles.z > angleZ && newRotation.eulerAngles.z < 360 - angleZ);
+			if (outY || outX || outZ)
 			{
-				for (int i = 0; i < renderers.Count; i++)
-				{
-					renderers[i].SetActive(false);
-				}
+				lerpDown = true;
 			}
 			else
 			{
-				for (int i = 0; i < renderers.Count; i++)
-				{
-					renderers[i].SetActive(true);
-				}
+				lerpDown = false;
+			}
+
+			if(lerpDown)
+			{
+				alpha = Mathf.Lerp(alpha, 0, 0.05f);
+			}
+			else
+			{
+				alpha = Mathf.Lerp(alpha, 1, 0.05f);
+			}
+
+			for (int i = 0; i < mats.Count; i++)
+			{
+				Color col = originalColors[i];
+				col.a = alpha;
+				mats[i].SetColor("_Color", col);
 			}
 		}
 	}
