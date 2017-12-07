@@ -16,7 +16,7 @@ public class RotationChecker : MonoBehaviour {
 	public List<Material> mats;
 	private List<Color> originalColors;
 
-	public float alpha;
+	private float alpha;
 
 	//[Tooltip("Transform of the joint, used to move and rotate the head.")]
 	//public Transform HeadTransform;
@@ -28,6 +28,7 @@ public class RotationChecker : MonoBehaviour {
 		{
 			platform = kinectManager.GetSensorPlatform();
 		}
+		originalColors = new List<Color>();
 
 	}
 
@@ -55,7 +56,6 @@ public class RotationChecker : MonoBehaviour {
 
 			// head rotation
 			Quaternion newRotation = manager.GetHeadRotation(true);
-			Debug.Log(newRotation.eulerAngles.z);
 			bool lerpDown = false;
 			bool outY = (newRotation.eulerAngles.y > angleY && newRotation.eulerAngles.y < 360 - angleY);
 			bool outX = (newRotation.eulerAngles.x > angleX && newRotation.eulerAngles.x < 360 - angleX);
@@ -63,10 +63,6 @@ public class RotationChecker : MonoBehaviour {
 			if (outY || outX || outZ)
 			{
 				lerpDown = true;
-			}
-			else
-			{
-				lerpDown = false;
 			}
 
 			if(lerpDown)
