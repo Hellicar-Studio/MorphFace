@@ -19,6 +19,8 @@ ModelImporter:
     400008: Neck
     400010: right_cheek
     400012: right_eyebrow
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: Blink-RIGHT_01
     9500000: //RootNode
     13700000: Blink-RIGHT_01
