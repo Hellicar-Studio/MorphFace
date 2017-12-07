@@ -12,6 +12,11 @@ ModelImporter:
     100008: Neck
     100010: right_cheek
     100012: right_eyebrow
+    100014: forehead
+    100016: Head
+    100018: jaw
+    100020: left_lip
+    100022: right_lip
     400000: Blink-RIGHT_01
     400002: left_cheek
     400004: left_eyebrow
@@ -19,6 +24,11 @@ ModelImporter:
     400008: Neck
     400010: right_cheek
     400012: right_eyebrow
+    400014: forehead
+    400016: Head
+    400018: jaw
+    400020: left_lip
+    400022: right_lip
     2300000: //RootNode
     3300000: //RootNode
     4300000: Blink-RIGHT_01
