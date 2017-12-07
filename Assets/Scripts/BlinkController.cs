@@ -7,8 +7,8 @@ public class BlinkController : MonoBehaviour {
 	private FacetrackingManager manager;
 	private KinectInterop.DepthSensorPlatform platform;
 
-	public MeshRenderer eyelidLeft;
-	public MeshRenderer eyelidRight;
+	public SkinnedMeshRenderer eyelidLeft;
+	public SkinnedMeshRenderer eyelidRight;
 
 	public float cooldown;
 	private float timeOfLastChangeLeft;
