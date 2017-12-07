@@ -16,6 +16,7 @@ ModelImporter:
     100016: right_cheek
     100018: right_eyebrow
     100020: right_lip
+    100022: Morph-HEAD
     400000: forehead
     400002: Head
     400004: jaw
@@ -27,9 +28,12 @@ ModelImporter:
     400016: right_cheek
     400018: right_eyebrow
     400020: right_lip
+    400022: Morph-HEAD
     4300000: Head
+    4300002: Morph-HEAD
     9500000: //RootNode
     13700000: Head
+    13700002: Morph-HEAD
   materials:
     importMaterials: 1
     materialName: 0
@@ -76,8 +80,8 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 60
-    normalImportMode: 0
+    normalSmoothAngle: 180
+    normalImportMode: 1
     tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
