@@ -396,7 +396,7 @@ public class ModelFaceControllerRotation : MonoBehaviour
 
 		// [-1, +1] -> [0, 1]
 		//fAUnorm = (fAU + 1f) / 2f;
-		float fValue = fMin + (fMax - fMin) * fAU;
+		float fValue = fMax;//fMin + (fMax - fMin) * fAU;
 
 		Vector3 jointRot = joint.localRotation.eulerAngles;
 
