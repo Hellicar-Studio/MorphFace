@@ -17,6 +17,9 @@ public class ModelFaceControllerPosition : MonoBehaviour
 
 	public float minDifference;
 
+	public bool forceMaximum;
+	public bool forceMinimum;
+
 	// for testing purposes
 	//public Transform overlayObj;
 
@@ -401,7 +404,12 @@ public class ModelFaceControllerPosition : MonoBehaviour
 		if(Mathf.Abs(fAU) < minDifference) {
 			fAU = 0;
 		}
+		if (forceMaximum)
+			fAU = -1;
+		if (forceMinimum)
+			fAU = 1;
 		float fValue = fMin + (fMax - fMin) * fAU;
+
 
 		Vector3 jointPos = joint.localPosition;// = joint.localRotation.eulerAngles;
 
