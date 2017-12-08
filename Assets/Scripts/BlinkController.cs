@@ -27,7 +27,7 @@ public class BlinkController : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update()
+	public void ControlBlinks()
 	{   
 		// get the face-tracking manager instance
 		if (manager == null)

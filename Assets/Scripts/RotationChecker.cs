@@ -11,8 +11,6 @@ public class RotationChecker : MonoBehaviour {
 	public float angleX;
 	public float angleZ;
 
-
-
 	public List<Material> mats;
 	private List<Color> originalColors;
 
@@ -33,7 +31,7 @@ public class RotationChecker : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update()
+	public void CheckRotation()
 	{
 		if(originalColors.Count == 0)
 		{
