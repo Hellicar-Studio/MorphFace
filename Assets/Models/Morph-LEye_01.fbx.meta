@@ -29,6 +29,8 @@ ModelImporter:
     400018: right_cheek
     400020: right_eyebrow
     400022: right_lip
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: Morph-LEye_01
     9500000: //RootNode
     13700000: Morph-LEye_01
