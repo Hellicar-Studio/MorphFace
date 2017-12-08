@@ -624,7 +624,7 @@ public class FacetrackingManager : MonoBehaviour
 
 	void Update()
 	{
-		//ManageFacetracking();
+		ManageFacetracking();
 	}
 
 	public void ManageFacetracking() 
