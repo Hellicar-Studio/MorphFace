@@ -622,9 +622,9 @@ public class FacetrackingManager : MonoBehaviour
 		instance = null;
 	}
 	
-	void Update() 
+	public void ManageFacetracking() 
 	{
-		if(isFacetrackingInitialized)
+		if (isFacetrackingInitialized)
 		{
 			KinectManager kinectManager = KinectManager.Instance;
 			if(kinectManager && kinectManager.IsInitialized())

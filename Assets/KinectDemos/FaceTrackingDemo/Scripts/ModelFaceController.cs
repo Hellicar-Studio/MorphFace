@@ -15,6 +15,10 @@ public class ModelFaceController : MonoBehaviour
 	[Tooltip("Camera used to estimate the overlay position of the head over the background.")]
 	public Camera foregroundCamera;
 
+	public int playerIndex = 0;
+
+	public int check = 0;
+
 	// for testing purposes
 	//public Transform overlayObj;
 	
@@ -190,12 +194,13 @@ public class ModelFaceController : MonoBehaviour
 		}
 	}
 	
-	void Update() 
+	public void ControlModelFace() 
 	{
 		// get the face-tracking manager instance
 		if(manager == null)
 		{
 			manager = FacetrackingManager.Instance;
+			//manager.playerIndex = playerIndex;
 		}
 
 		if(manager && manager.GetFaceTrackingID() != 0)
