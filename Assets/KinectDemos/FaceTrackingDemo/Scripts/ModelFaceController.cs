@@ -200,7 +200,6 @@ public class ModelFaceController : MonoBehaviour
 		if(manager == null)
 		{
 			manager = FacetrackingManager.Instance;
-			//manager.playerIndex = playerIndex;
 		}
 
 		if(manager && manager.GetFaceTrackingID() != 0)
