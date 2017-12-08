@@ -621,7 +621,12 @@ public class FacetrackingManager : MonoBehaviour
 		isFacetrackingInitialized = false;
 		instance = null;
 	}
-	
+
+	void Update()
+	{
+		ManageFacetracking();
+	}
+
 	public void ManageFacetracking() 
 	{
 		if (isFacetrackingInitialized)
