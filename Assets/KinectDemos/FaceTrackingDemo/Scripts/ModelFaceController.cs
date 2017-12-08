@@ -15,10 +15,6 @@ public class ModelFaceController : MonoBehaviour
 	[Tooltip("Camera used to estimate the overlay position of the head over the background.")]
 	public Camera foregroundCamera;
 
-	public int playerIndex = 0;
-
-	public int check = 0;
-
 	// for testing purposes
 	//public Transform overlayObj;
 	
