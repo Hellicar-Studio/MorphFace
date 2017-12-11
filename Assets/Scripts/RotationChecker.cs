@@ -30,6 +30,15 @@ public class RotationChecker : MonoBehaviour {
 
 	}
 
+	private void OnApplicationQuit()
+	{
+		for (int i = 0; i < mats.Count; i++)
+		{
+			Color col = originalColors[i];
+			mats[i].SetColor("_Color", col);
+		}
+	}
+
 	// Update is called once per frame
 	public void CheckRotation()
 	{
