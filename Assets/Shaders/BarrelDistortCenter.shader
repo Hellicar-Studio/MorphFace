@@ -3,9 +3,9 @@
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
-		_Range("Range", Float) = 0.5
-		_Center("Center", Vector) = (0.5, 0.5, 0.5, 0.5)
-		_Strength("Strength", Float) = 1.0
+		_StrengthMin("StrengthMin", Float) = 1.0
+		_StrengthMax("StrengthMax", Float) = 1.0
+
 	}
 	SubShader
 	{
@@ -38,10 +38,11 @@
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
-			float _Range;
-			float2 _Center;
+			float _Faces[12];
 
-			float _Strength;
+			float _StrengthMin;
+			float _StrengthMax;
+
 
 			v2f vert (appdata v)
 			{
@@ -54,23 +55,26 @@
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				float2 center = _Center.xy;
 				float2 pos = i.uv;
-				pos.x *= 16.0 / 9.0;
-				float2 dir = pos - center;
-				float dist = distance(pos, center);
-				float strength = smoothstep(_Strength, -0.01, dist);
-				if (dist > 0.0)
-				{
-					dist = 1.0 - dist;
-					dir *= dist * strength;
+				for (int j = 0; j < 12; j+=2) {
+					float2 center = float2(_Faces[j], _Faces[j+1]);
+					pos.x *= 16.0 / 9.0;
+					float2 dir = pos - center;
+					float dist = distance(pos, center);
+					float maxDistort = 0.05f;
+					if (dist < maxDistort) dist = maxDistort;
+					float strength = smoothstep(_StrengthMin, _StrengthMax, dist);
+					if (dist > 0.0)
+					{
+						dist = 1.0 - dist;
+						dir *= dist * strength;
 
-					pos.x -= dir.x;
-					pos.y -= dir.y;
+						pos.x -= dir.x;
+						pos.y -= dir.y;
+					}
+					pos.x *= 9.0 / 16.0;
 				}
-
-				pos.x *= 9.0 / 16.0;
-
+				
 				float4 c = tex2D(_MainTex, pos);
 				//gl_FragColor = c;
 				//fixed4 col = tex2D(_MainTex, p);

@@ -21,7 +21,15 @@ public class EffectApplier : MonoBehaviour {
 
 	public float yOffset;
 
+	private float[] faces;
+
 	private KinectManager manager;
+
+	private void Awake()
+	{
+		effect.SetFloatArray("_Faces", new float[12]);
+		faces = new float[12];
+	}
 
 	protected void OnRenderImage(RenderTexture source, RenderTexture destination)
 	{
@@ -31,24 +39,41 @@ public class EffectApplier : MonoBehaviour {
 		}
 		if(manager && manager.IsInitialized())
 		{
-			Rect backgroundRect = foregroundCamera.pixelRect;
-			long userId = manager.GetUserIdByIndex(playerIndex);
-
-			int iJointIndex = (int)trackedJoint;
-
-			if (manager.IsJointTracked(userId, iJointIndex))
+			for(int i = 0; i < 12; i+=2)
 			{
-				Vector2 posJoint = manager.GetJointPosColorOverlay(userId, iJointIndex, backgroundRect);
-				posJoint.y += yOffset;
-				posJoint.x /= backgroundRect.width;
-				posJoint.y /= backgroundRect.height;
-				posJoint.x *= 16.0f / 9.0f;
-				if (posJoint != Vector2.zero)
+				Rect backgroundRect = foregroundCamera.pixelRect;
+				long userId = manager.GetUserIdByIndex(i/2);
+
+				int iJointIndex = (int)trackedJoint;
+
+				if (manager.IsJointTracked(userId, iJointIndex))
 				{
-					effect.SetVector("_Center", new Vector4(posJoint.x, posJoint.y, 0.0f, 0.0f));
+					Vector2 posJoint = manager.GetJointPosColorOverlay(userId, iJointIndex, backgroundRect);
+					posJoint.y += yOffset;
+					posJoint.x /= backgroundRect.width;
+					posJoint.y /= backgroundRect.height;
+					posJoint.x *= 16.0f / 9.0f;
+					if (posJoint != Vector2.zero)
+					{
+						faces[i] = posJoint.x;
+						faces[i + 1] = posJoint.y;
+					}
+					else
+					{
+						faces[i] = 100;
+						faces[i + 1] = 100;
+					}
+				}
+				else
+				{
+					faces[i] = 100;
+					faces[i + 1] = 100;
 				}
 			}
 		}
+
+		//effect.SetVector("_Center", new Vector4(posJoint.x, posJoint.y, 0.0f, 0.0f));
+		effect.SetFloatArray("_Faces", faces);
 
 		if (effect != null)
 		{
