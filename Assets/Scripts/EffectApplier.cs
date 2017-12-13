@@ -6,7 +6,7 @@ public class EffectApplier : MonoBehaviour {
 
 	public Material effect;
 
-	protected void nRenderImage(RenderTexture source, RenderTexture destination)
+	protected void OnRenderImage(RenderTexture source, RenderTexture destination)
 	{
 		if(effect != null)
 		{
