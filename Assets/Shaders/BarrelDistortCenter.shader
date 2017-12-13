@@ -40,6 +40,7 @@
 			float4 _MainTex_ST;
 			float _Range;
 			float2 _Center;
+
 			float _Strength;
 
 			v2f vert (appdata v)
@@ -58,10 +59,11 @@
 				pos.x *= 16.0 / 9.0;
 				float2 dir = pos - center;
 				float dist = distance(pos, center);
-				if (dist > 0.0 && dist < _Range)
+				float strength = smoothstep(_Strength, -0.01, dist);
+				if (dist > 0.0)
 				{
 					dist = 1.0 - dist;
-					dir *= dist * _Strength;
+					dir *= dist * strength;
 
 					pos.x -= dir.x;
 					pos.y -= dir.y;
