@@ -29,7 +29,7 @@ public class EffectApplier : MonoBehaviour {
 	{
 		effect.SetFloatArray("_Faces", new float[12]);
 		faces = new float[12];
-		Cursor.visible = false;
+		//Cursor.visible = false;
 	}
 
 	protected void OnRenderImage(RenderTexture source, RenderTexture destination)
