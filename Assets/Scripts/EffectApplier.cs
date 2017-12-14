@@ -29,7 +29,6 @@ public class EffectApplier : MonoBehaviour {
 	{
 		effect.SetFloatArray("_Faces", new float[12]);
 		faces = new float[12];
-		Cursor.visible = false;
 	}
 
 	protected void OnRenderImage(RenderTexture source, RenderTexture destination)
@@ -56,8 +55,17 @@ public class EffectApplier : MonoBehaviour {
 					posJoint.x *= 16.0f / 9.0f;
 					if (posJoint != Vector2.zero)
 					{
-						faces[i] = posJoint.x;
-						faces[i + 1] = posJoint.y;
+						if(faces[i] == 100 && faces[i+1] == 100)
+						{
+							faces[i] = posJoint.x;
+							faces[i + 1] = posJoint.y;
+						} else
+						{
+							faces[i] = Mathf.Lerp(faces[i], posJoint.x, smoothFactor);
+							faces[i+1] = Mathf.Lerp(faces[i+1], posJoint.y, smoothFactor);
+
+						}
+
 					}
 					else
 					{

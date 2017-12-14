@@ -5,6 +5,7 @@
 		_MainTex ("Texture", 2D) = "white" {}
 		_StrengthMin("StrengthMin", Float) = 1.0
 		_StrengthMax("StrengthMax", Float) = 1.0
+		_MaxDistort("MaxDistort", Float) = 0.05
 
 	}
 	SubShader
@@ -42,6 +43,7 @@
 
 			float _StrengthMin;
 			float _StrengthMax;
+			float _MaxDistort;
 
 
 			v2f vert (appdata v)
@@ -56,12 +58,12 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				float2 pos = i.uv;
+				float maxDistort = _MaxDistort;
 				for (int j = 0; j < 12; j+=2) {
 					float2 center = float2(_Faces[j], _Faces[j+1]);
 					pos.x *= 16.0 / 9.0;
 					float2 dir = pos - center;
 					float dist = distance(pos, center);
-					float maxDistort = 0.05f;
 					if (dist < maxDistort) dist = maxDistort;
 					float strength = smoothstep(_StrengthMin, _StrengthMax, dist);
 					if (dist > 0.0)
