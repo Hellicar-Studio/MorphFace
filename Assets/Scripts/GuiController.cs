@@ -5,27 +5,31 @@ using UnityEngine.UI;
 
 public class GuiController : MonoBehaviour {
 
-	public Material mat;
+	public EffectApplier effect;
 
 	public Slider sMin;
 	public Slider maxDistort;
+	public Slider yOffset;
 
 	public GameObject controls;
 
 	// Use this for initialization
 	void Start () {
 		sMin.value = PlayerPrefs.GetFloat("_StrengthMin");
-		Cursor.visible = false;
 		maxDistort.value = PlayerPrefs.GetFloat("_MaxDistort");
+		yOffset.value = PlayerPrefs.GetFloat("_YOffset");
+		Cursor.visible = false;
 	}
 
 	// Update is called once per frame
 	void Update () {
 		PlayerPrefs.SetFloat("_StrengthMin", sMin.value);
 		PlayerPrefs.SetFloat("_MaxDistort", maxDistort.value);
+		PlayerPrefs.SetFloat("_YOffset", yOffset.value);
 
-		mat.SetFloat("_StrengthMin", sMin.value);
-		mat.SetFloat("_MaxDistort", maxDistort.value);
+		effect.yOffset = yOffset.value;
+		effect.effect.SetFloat("_StrengthMin", sMin.value);
+		effect.effect.SetFloat("_MaxDistort", maxDistort.value);
 
 		if(Input.GetKeyUp("g"))
 		{
