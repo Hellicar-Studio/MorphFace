@@ -19,6 +19,9 @@ public class GuiController : MonoBehaviour {
 		maxDistort.value = PlayerPrefs.GetFloat("_MaxDistort");
 		yOffset.value = PlayerPrefs.GetFloat("_YOffset");
 		Cursor.visible = false;
+		effect.yOffset = yOffset.value;
+		effect.effect.SetFloat("_StrengthMin", sMin.value);
+		effect.effect.SetFloat("_MaxDistort", maxDistort.value);
 	}
 
 	// Update is called once per frame
