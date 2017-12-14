@@ -54,18 +54,23 @@
 				UNITY_TRANSFER_FOG(o,o.vertex);
 				return o;
 			}
+
+			float map(float value, float low1, float high1, float low2, float high2) {
+				return low2 + (value - low1) * (high2 - low2) / (high1 - low1);
+			}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
 				float2 pos = i.uv;
 				float maxDistort = _MaxDistort;
+				float strength;
 				for (int j = 0; j < 12; j+=2) {
 					float2 center = float2(_Faces[j], _Faces[j+1]);
 					pos.x *= 16.0 / 9.0;
 					float2 dir = pos - center;
 					float dist = distance(pos, center);
-					if (dist < maxDistort) dist = maxDistort;
-					float strength = smoothstep(_StrengthMin, _StrengthMax, dist);
+					strength = smoothstep(_StrengthMin, 0.0, dist);
+					strength = map(strength, 0.0, 1.0, 0.0, _MaxDistort);
 					if (dist > 0.0)
 					{
 						dist = 1.0 - dist;
@@ -78,10 +83,6 @@
 				}
 				
 				float4 c = tex2D(_MainTex, pos);
-				//gl_FragColor = c;
-				//fixed4 col = tex2D(_MainTex, p);
-				//col.r += dist;
-				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, col);
 				return c;
 			}
